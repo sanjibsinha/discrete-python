@@ -1,4 +1,11 @@
 import math as m
+import cProfile, pstats, io
+from pstats import SortKey
+pr = cProfile.Profile()
+pr.enable()
+
+
+
 take_input = input('Please enter any positive integer.')
 converted_input = int(take_input)
 
@@ -19,17 +26,28 @@ if(number_of_factors == 2):
 else:
     print(f'{converted_input} is not Prime')
     
+    
+pr.disable()
+s = io.StringIO()
+sortby = SortKey.CUMULATIVE
+ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+ps.print_stats()
+print(s.getvalue())
+    
 '''
-Number of factors: 4
-12 is not Prime
 
-Number of factors: 9
-568942365 is not Prime
+Please enter any positive integer.987456321478963
+Number of factors: 5
+987456321478963 is not Prime
+         31423822 function calls in 8.300 seconds
 
-Number of factors: 2
-19991 is Prime
+   Ordered by: cumulative time
 
-Number of factors: 2
-4589756321 is Prime
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+ 31423818    4.265    0.000    4.265    0.000 {built-in method math.sqrt}
+        1    4.035    4.035    4.035    4.035 {built-in method builtins.input}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
 '''
     
