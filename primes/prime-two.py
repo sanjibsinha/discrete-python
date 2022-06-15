@@ -1,3 +1,8 @@
+import cProfile, pstats, io
+from pstats import SortKey
+pr = cProfile.Profile()
+pr.enable()
+
 num = 0
 
 def is_prime(num):
@@ -22,3 +27,27 @@ if(is_prime(converted_input)):
 else:
     print(f'{converted_input} is not Prime')
     
+
+pr.disable()
+s = io.StringIO()
+sortby = SortKey.CUMULATIVE
+ps = pstats.Stats(pr, stream=s).sort_stats(sortby)
+ps.print_stats()
+print(s.getvalue())
+
+
+'''
+
+Please enter any positive integer.987456321478963
+987456321478963 is not Prime
+         4 function calls in 3.305 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    3.305    3.305    3.305    3.305 {built-in method builtins.input}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        1    0.000    0.000    0.000    0.000 /home/sanjib/Documents/development/discrete-python/primes/prime-two.py:8(is_prime)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+
+'''
