@@ -12,10 +12,10 @@ def find_probability(the_array, the_length_of_array, the_element):
     # find probability up to 4 decimal places
     return round(count / the_length_of_array, 4)
     
-the_array_variable = [22, 22, 22, 22, 22, 22, 22]
+the_array_variable = [22, 720, 34, 89, 113, 56, 71]
 the_element_to_find = 22
 the_length_of_array = len(the_array_variable)
 
 print(f'The probability is: {find_probability(the_array_variable, the_length_of_array , the_element_to_find)}')
 
-# The probability is: 1.0
+# The probability is: 0.1429
